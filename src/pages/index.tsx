@@ -1,10 +1,21 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { trpc } from "../utils/trpc";
+
+import { customAlphabet } from "nanoid";
+
+const nanoid=customAlphabet("abcdefghijklmnopqrstuvwxyz123456789",10);
 
 
 const Home: NextPage = () => {
-  const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
+  const router =useRouter();
+  
+
+  function createRoom(){
+    const roomId =nanoid();
+    router.push(`/rooms/${roomId}`);
+  }
 
   return (
     <>
